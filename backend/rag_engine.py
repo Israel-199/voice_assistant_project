@@ -115,7 +115,8 @@ class RAGEngine:
 
         if provider == "gemini" and gemini_key:
             try:
-                import google.generativeai as genai
+                import importlib
+                genai = importlib.import_module("google.generativeai")
                 genai.configure(api_key=gemini_key)
                 model = genai.GenerativeModel('gemini-1.5-flash')
                 prompt = (
