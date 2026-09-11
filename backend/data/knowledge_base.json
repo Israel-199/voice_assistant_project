@@ -1,0 +1,152 @@
+[
+  {
+    "id": "DOC-001",
+    "title": "Quantum Reactor Core Thermal Emergency Protocol",
+    "category": "Engineering & Reactor Safety",
+    "content": "In the event of a Quantum Reactor Core thermal runaway exceeding 4,500 Kelvin, the Duty Officer must immediately initiate Primary Coolant Flush Procedure B-9. Step 1: Engage magnetic containment dampeners via Auxiliary Panel 4. Step 2: Inject Liquid Deuterium Buffer at a rate of 120 liters per second. Step 3: If temperature remains above 5,000 Kelvin for more than 30 seconds, order an immediate plasma vent from Vent Port 3-Alpha. WARNING: Never bypass the thermal safety interlock without Captain Authorization Code Delta-7-Niner. Failure to stabilize within 90 seconds will trigger automated emergency jettison of the reactor core."
+  },
+  {
+    "id": "DOC-002",
+    "title": "Slipstream Drive Alignment & Warp Factor 4 Calibration",
+    "category": "Navigation & Propulsion",
+    "content": "To engage Slipstream Drive at Warp Factor 4, the vessel must align its sub-space deflector array to a vector frequency of 47.3 GHz. Calibration requires verifying that tachyon flux variance is under 0.05 micro-Tesla. If sub-space turbulence exceeds Class-3 magnitude, engage secondary stabilizer coils before initiating jump sequence. Captain's clearance is mandatory for warp factors exceeding Warp 3.5 in civilian or unmapped sectors."
+  },
+  {
+    "id": "DOC-003",
+    "title": "Tactical Defense Shield Phase Modulation",
+    "category": "Tactical & Defense",
+    "content": "When defending against coherent energy broadsides, shield phase frequencies must be dynamically modulated to prevent harmonic penetration. Navigate to Shield Control Interface -> Frequency Matrix. Select Auto-Harmonic Rotation at 120 Hz cycles. Primary forward shield capacity is rated at 1.2 Terawatts. If forward shield drops below 25%, re-route 40% auxiliary power from aft impulse thrusters to forward shield grid."
+  },
+  {
+    "id": "DOC-004",
+    "title": "Atmospheric Re-entry & Heat Shield Management",
+    "category": "Flight Operations",
+    "content": "During planetary orbital decay and atmospheric entry, entry angle must be maintained between 14.2 degrees and 16.8 degrees relative to orbital horizon. Ablative heat shield temperatures will reach 2,800 degrees Celsius. Lower ventral thermal flaps at entry velocity Mach 18. If entry pitch strays beyond 17 degrees, atmospheric friction will breach lower hull plating."
+  },
+  {
+    "id": "DOC-005",
+    "title": "Life Support Systems & O2 Scrubber Maintenance",
+    "category": "Life Support",
+    "content": "Primary life support maintains atmospheric pressure at 101.3 kPa with 21% Oxygen and 78% Nitrogen. Molecular O2 scrubbers must be regenerated every 120 operational hours using thermal catalytic cycles. In the event of primary scrubber failure, auxiliary emergency oxygen canisters will automatically deploy, providing 48 hours of breathable atmosphere for a crew of 150."
+  },
+  {
+    "id": "DOC-006",
+    "title": "Transporter Array Biological Target Lock & Buffer Protocols",
+    "category": "Teleportation & Logistics",
+    "content": "Transporter operations for biological personnel require a minimum molecular phase lock confidence of 99.98%. Pattern buffer memory matrix must be cleared of remnant bio-signatures prior to every transport. Never attempt transport during ion storms or sub-space displacement anomalies without activating quantum bio-filters."
+  },
+  {
+    "id": "DOC-007",
+    "title": "Hull Breach Containment & Emergency Force Fields",
+    "category": "Emergency Procedures",
+    "content": "Upon hull breach detection in any compartment, emergency blast doors and Level-4 force fields auto-deploy within 400 milliseconds. Personnel locked inside depressurizing sectors must secure emergency EVA helmets within 15 seconds. Manual override of force field doors requires Security Clearance Grade 3 or Captain Command Code."
+  },
+  {
+    "id": "DOC-008",
+    "title": "Captain Override Authorization Codes & Security Hierarchy",
+    "category": "Command & Security",
+    "content": "System Security Clearance Levels are ordered: Level 1 (Ensign/Crew), Level 2 (Department Head), Level 3 (Executive Officer), Level 4 (Captain). Command Authorization Code 'Alpha-Omega-771' grants absolute system override including self-destruct countdown, zero-point energy discharge, and black-box memory encryption wipe."
+  },
+  {
+    "id": "DOC-009",
+    "title": "Sub-Space Communications Relay Array Maintenance",
+    "category": "Communications",
+    "content": "Sub-space transceiver arrays operate on quantum-entangled photon channels at 14.8 GHz. Daily maintenance involves purging tachyon static noise from the transceiver manifold using helium coolant sweeps. Signal latency to fleet headquarters across 10 light-years is maintained at under 1.2 seconds."
+  },
+  {
+    "id": "DOC-010",
+    "title": "Impulse Thruster Plasma Injection & Maneuvering",
+    "category": "Propulsion",
+    "content": "Sub-light maneuvering relies on twin magnetoplasmadynamic impulse engines. Plasma injection pressure must remain between 400 and 450 bar. For high-g combat maneuvers, activate inertial dampeners to 100% capacity to protect vessel structural integrity and crew from acceleration stress."
+  },
+  {
+    "id": "DOC-011",
+    "title": "Medical Bay Bio-Hazard Quarantine Lockdown Protocol",
+    "category": "Medical & Safety",
+    "content": "If unknown alien pathogen or bio-hazard Level-4 is detected in Medical Bay, automated bio-hazard lockdown sequence 'Code Blue' is initiated. Isolation containment fields seal all airlocks. Decontamination protocol involves ultraviolet-C flash sterilization and ozone gas purge lasting 20 minutes."
+  },
+  {
+    "id": "DOC-012",
+    "title": "Gravitational Anomaly & Black Hole Proximity Navigation",
+    "category": "Astrographics & Danger Protocols",
+    "content": "When operating within 5 astronomical units of a collapsed star or black hole event horizon, gravitational shear sensors must be set to real-time telemetry. Time dilation correction algorithms must be synchronized with fleet standard epoch time every 60 seconds."
+  },
+  {
+    "id": "DOC-013",
+    "title": "Auxiliary Battery & Emergency Zero-Point Module Discharge",
+    "category": "Engineering & Power Grid",
+    "content": "If main plasma conduit ruptures, auxiliary batteries provide 6 hours of backup power for life support, sensors, and basic maneuvering. In extreme emergencies, the Zero-Point Energy Module (ZPM) can be discharged to deliver 10 Megawatts for emergency force fields or sub-space distress beacons."
+  },
+  {
+    "id": "DOC-014",
+    "title": "Sensor Array Long-Range Scanning & Stealth Detection",
+    "category": "Sensory & Intelligence",
+    "content": "Long-range sensor array uses active multi-spectral lidar and passive gravimetric detectors. To scan through cloaking fields or nebula gas clouds, switch sensor mode to Tachyon Resonance Scanning at 890 MHz."
+  },
+  {
+    "id": "DOC-015",
+    "title": "Shuttle Bay Launch & Decompression Protocols",
+    "category": "Flight Operations",
+    "content": "Prior to opening Shuttle Bay outer atmospheric doors, verify containment forcefield 'Atmosphere Barrier Gamma' is active. Flight deck pressure must match internal atmospheric baseline. Automatic bay depressurization sequence takes 45 seconds."
+  },
+  {
+    "id": "DOC-016",
+    "title": "Cybernetic System Intrusion & Firewall Isolation",
+    "category": "Cyber Security",
+    "content": "If unauthorized cybernetic intrusion or AI override attempt is detected on main computer core, activate Security Protocol 'Iron Gate'. This severs external datalinks, isolates isolated sub-processors, and initiates quantum cryptographic key rotation."
+  },
+  {
+    "id": "DOC-017",
+    "title": "Torpedo Armament & Photon Warhead Assembly",
+    "category": "Tactical & Ordnance",
+    "content": "Standard photon warhead yields 25 Megatons. Loading sequence: Select Launcher 1 or 2 -> Initialize Antimatter Injector -> Calibrate Proximity Fusing -> Arm Warhead. Warhead arming requires tactical officer confirmation and Captain's clearance."
+  },
+  {
+    "id": "DOC-018",
+    "title": "Cryogenic Crew Stasis Chambers & Reanimation",
+    "category": "Medical & Stasis",
+    "content": "During long-range deep space transit, crew stasis pods maintain body core temperature at minus 120 degrees Celsius. Thawing and reanimation sequence takes 120 minutes with continuous neuro-stimulator monitoring."
+  },
+  {
+    "id": "DOC-019",
+    "title": "Solar Flare & Cosmic Radiation Storm Shielding",
+    "category": "Environmental Hazards",
+    "content": "During Class-X solar flares or cosmic coronal mass ejections, orient vessel ventral side towards radiation origin and extend magnetic deflector sails. All non-essential personnel must report to shielded inner deck quarters."
+  },
+  {
+    "id": "DOC-020",
+    "title": "Distress Signal Beacon Broadcasting Standards",
+    "category": "Communications & Emergency",
+    "content": "Emergency distress beacons broadcast on emergency sub-space frequency 121.5 MHz and quantum channel Mayday-9. Signal contains vessel telemetry, last known spatial coordinates, crew count, and structural status indicator."
+  },
+  {
+    "id": "DOC-021",
+    "title": "Tractor Beam Capture & Towing Mechanics",
+    "category": "Tactical & Rescue",
+    "content": "Tractor beam emitter uses high-density graviton beams to lock onto target hulls. Target mass must not exceed 500,000 metric tons. Towing speeds are strictly restricted to sub-light speeds under Impulse 0.5."
+  },
+  {
+    "id": "DOC-022",
+    "title": "Waste Recycling & Water Reclamation Systems",
+    "category": "Life Support",
+    "content": "Closed-loop hydroponic and water filtration systems recycle 99.4% of onboard liquid waste. Filtration membranes must undergo ultrasonic backwash cleaning every 72 hours to prevent particulate buildup."
+  },
+  {
+    "id": "DOC-023",
+    "title": "Sub-Space Probe Deployment & Mapping",
+    "category": "Exploration",
+    "content": "Class-4 deep-space probes possess 30-day autonomous duration. Equipped with gravimetric, chemical, and atmospheric sensors. Probe launch speed is Mach 12 upon egress from vessel tube."
+  },
+  {
+    "id": "DOC-024",
+    "title": "Self-Destruct Sequence Operating Parameters",
+    "category": "Command & Security",
+    "content": "Self-destruct requires dual authorization: Captain Code Alpha-Omega-771 and Executive Officer Code Bravo-Sigma-992. Countdown defaults to 300 seconds and can be aborted up to 10 seconds prior to zero."
+  },
+  {
+    "id": "DOC-025",
+    "title": "Docking & Space Station Mooring Protocol",
+    "category": "Navigation & Logistics",
+    "content": "Approach speed to orbital station docking port 4 must not exceed 0.2 meters per second. Extend magnetic docking clamps once distance closes to 1.5 meters. Equalize airlock pressure before opening inner seals."
+  }
+]
