@@ -99,8 +99,9 @@ class TranslationEngine:
                         "provider": "GoogleTranslate"
                     }
             except Exception as e:
-                print(f"GoogleTranslator attempt {attempt+1} failed: {e}")
-                time.sleep(0.5)
+                clean_reason = "Network offline or DNS service unavailable" if ("NameResolutionError" in str(e) or "getaddrinfo" in str(e) or "Max retries exceeded" in str(e)) else "Service busy"
+                print(f"[Translation System] Primary Google Translator (Attempt {attempt+1}) unavailable: {clean_reason}")
+                time.sleep(0.3)
 
         for attempt in range(2):
             try:
@@ -121,16 +122,17 @@ class TranslationEngine:
                         "provider": "MyMemory"
                     }
             except Exception as e:
-                print(f"MyMemoryTranslator attempt {attempt+1} failed: {e}")
-                time.sleep(0.5)
+                clean_reason = "Network offline or DNS service unavailable" if ("NameResolutionError" in str(e) or "getaddrinfo" in str(e) or "Max retries exceeded" in str(e)) else "Service busy"
+                print(f"[Translation System] Secondary MyMemory Translator (Attempt {attempt+1}) unavailable: {clean_reason}")
+                time.sleep(0.3)
 
         return {
             "translated_text": text,
             "source_lang": "en",
             "target_lang": target_lang,
             "target_lang_name": self.SUPPORTED_LANGUAGES.get(target_lang, target_lang),
-            "provider": "Fallback",
-            "notice": "Translation service fallback active."
+            "provider": "Offline Fallback",
+            "notice": "Offline Mode Active: Online translation service was unreachable. Displaying original grounded text."
         }
 
     def get_supported_languages(self) -> Dict[str, str]:
