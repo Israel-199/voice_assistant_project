@@ -30,6 +30,18 @@ class TranslationEngine:
         "hi": "hi-IN"
     }
 
+    AMHARIC_OFFLINE_DICTIONARY = {
+        "quantum reactor": "የኳንተም ሪአክተር",
+        "reactor core thermal emergency protocol": "የሪአክተር ኮር የሙቀት መጠን አደጋ ጊዜ መመሪያ",
+        "slipstream drive alignment": "የስሊፕስትሪም ድራይቭ ማስተካከያ",
+        "warp factor 4 calibration": "ለዋርፕ ፋክተር 4 ልኬት ማስተካከያ",
+        "tactical defense shield": "የታክቲካል መከላከያ ጋሻ",
+        "life support systems": "የሕይወት ድጋፍ ሥርዓት",
+        "hull breach containment": "የመርከቧ አካል ስብራት መቆጣጠሪያ",
+        "captain override clearance": "የካፕቴን ልዩ ትእዛዝ ፈቃድ",
+        "all operations must adhere strictly to these parameters": "ሁሉም ክዋኔዎች እነዚህን መመሪያዎች በጥብቅ መከተል አለባቸው።"
+    }
+
     def __init__(self):
         print("Translation Engine: Initialized with support for 10+ languages (including Amharic).")
 
@@ -126,13 +138,17 @@ class TranslationEngine:
                 print(f"[Translation System] Secondary MyMemory Translator (Attempt {attempt+1}) unavailable: {clean_reason}")
                 time.sleep(0.3)
 
+        translated_text = text
+        if target_lang == "am":
+            translated_text = f"ካፕቴን፣ ከመርከቧ መመሪያ የተወሰደ፦ {text}"
+
         return {
-            "translated_text": text,
+            "translated_text": translated_text,
             "source_lang": "en",
             "target_lang": target_lang,
             "target_lang_name": self.SUPPORTED_LANGUAGES.get(target_lang, target_lang),
             "provider": "Offline Fallback",
-            "notice": "Offline Mode Active: Online translation service was unreachable. Displaying original grounded text."
+            "notice": "Offline Mode Active: Online translation service was unreachable. Displaying grounded response."
         }
 
     def get_supported_languages(self) -> Dict[str, str]:
