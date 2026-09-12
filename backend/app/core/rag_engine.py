@@ -5,12 +5,12 @@ import numpy as np
 from typing import List, Dict, Any
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from app.config import Config
 
 class RAGEngine:
     def __init__(self, data_path: str = None):
         if data_path is None:
-            base_dir = os.path.dirname(os.path.abspath(__file__))
-            data_path = os.path.join(base_dir, "data", "knowledge_base.json")
+            data_path = Config.DATA_PATH
             
         self.data_path = data_path
         self.documents = []

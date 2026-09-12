@@ -4,6 +4,7 @@ import uuid
 import time
 import edge_tts
 from typing import Dict, Any
+from app.config import Config
 
 class TTSEngine:
     VOICE_PROFILES = {
@@ -37,8 +38,7 @@ class TTSEngine:
 
     def __init__(self, output_dir: str = None):
         if output_dir is None:
-            base_dir = os.path.dirname(os.path.abspath(__file__))
-            output_dir = os.path.join(base_dir, "static", "audio")
+            output_dir = Config.STATIC_AUDIO_DIR
 
         self.output_dir = output_dir
         os.makedirs(self.output_dir, exist_ok=True)
@@ -93,7 +93,7 @@ class TTSEngine:
                 "file_size_bytes": os.path.getsize(file_path)
             }
 
-        fallback_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_amharic.mp3")
+        fallback_file = os.path.join(Config.BASE_DIR, "test_amharic.mp3")
         if os.path.exists(fallback_file):
             import shutil
             shutil.copy(fallback_file, file_path)
