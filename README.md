@@ -51,19 +51,34 @@ A full-stack, **100% free**, production-grade Captain Voice Assistant applicatio
 
 ---
 
+### ⚙️ Environment Configuration (`.env`)
+
+Create a `.env` file in the `backend/` directory with the following variables:
+
+```env
+# Backend API Port (Default: 5000)
+PORT=5000
+
+# Optional Cloud LLM API Keys (If omitted, system automatically uses 100% free built-in local grounded synthesizer)
+GEMINI_API_KEY=your_gemini_api_key_here
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+---
+
 ### 1. Launching the Backend (Flask API)
 
 ```bash
 cd backend
 
 # Option A: Using pre-created virtual environment
-.\venv\Scripts\python.exe app.py
+.\venv\Scripts\python.exe run.py
 
 # Option B: Creating a fresh virtual environment
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
-python app.py
+python run.py
 ```
 
 The Flask backend will start on **`http://127.0.0.1:5000`**.
