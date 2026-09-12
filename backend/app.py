@@ -8,13 +8,11 @@ from rag_engine import RAGEngine
 from translator import TranslationEngine
 from tts_engine import TTSEngine
 
-# Load environment variables
 load_dotenv()
 
 app = Flask(__name__, static_folder="static")
 CORS(app)
 
-# Initialize Core Services
 rag = RAGEngine()
 translator = TranslationEngine()
 tts = TTSEngine()
@@ -44,18 +42,13 @@ def process_query():
     if not query:
         return jsonify({"error": "Query string is required"}), 400
 
-    # 1. RAG Retrieval Phase
     retrieved_chunks = rag.search(query, top_k=top_k)
-
-    # 2. LLM Grounded Synthesis Phase
     llm_result = rag.generate_grounded_response(query, retrieved_chunks, provider=llm_provider)
 
-    # 3. Translation Phase
     llm_text = llm_result["response"]
     translation_result = translator.translate(llm_text, target_lang=target_language)
     translated_text = translation_result["translated_text"]
 
-    # 4. Voice Synthesis Phase (Captain's Voice)
     tts_result = tts.synthesize(
         text=translated_text,
         voice=voice_profile,
@@ -64,7 +57,6 @@ def process_query():
 
     elapsed_ms = round((time.time() - start_time) * 1000, 2)
 
-    # 5. Return Full Execution Trace
     return jsonify({
         "status": "success",
         "input": {

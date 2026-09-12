@@ -110,20 +110,18 @@ const PRESET_COMMANDS = [
 
 export default function CommandDeckPage() {
   const [query, setQuery] = useState("");
-  const [targetLang, setTargetLang] = useState("am"); // Default: Amharic
-  const [voiceProfile, setVoiceProfile] = useState("am-ET-AmehaNeural"); // Default: Amharic Male Captain
+  const [targetLang, setTargetLang] = useState("am");
+  const [voiceProfile, setVoiceProfile] = useState("am-ET-AmehaNeural");
   const [topK, setTopK] = useState(3);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<PipelineTrace | null>(null);
   const [activeTab, setActiveTab] = useState<"retrieval" | "llm" | "translation" | "tts">("retrieval");
   
-  // Audio state
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioProgress, setAudioProgress] = useState(0);
   const [audioDuration, setAudioDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Knowledge Base Modal state
   const [showKnowledgeModal, setShowKnowledgeModal] = useState(false);
   const [knowledgeList, setKnowledgeList] = useState<KnowledgeDoc[]>([]);
   const [kbSearch, setKbSearch] = useState("");
@@ -132,14 +130,12 @@ export default function CommandDeckPage() {
   const [newDocContent, setNewDocContent] = useState("");
   const [addingDoc, setAddingDoc] = useState(false);
 
-  // Available Voices & Languages
   const [voices, setVoices] = useState<Record<string, any>>({});
   const [languages, setLanguages] = useState<Record<string, string>>({});
   const [backendOnline, setBackendOnline] = useState<boolean | null>(null);
 
   const API_BASE = "http://127.0.0.1:5000";
 
-  // Check health and load available options
   useEffect(() => {
     fetchHealth();
     fetchVoicesAndLanguages();
@@ -183,7 +179,6 @@ export default function CommandDeckPage() {
     }
   };
 
-  // Handle auto voice selection when target language changes
   const handleLanguageChange = (lang: string) => {
     setTargetLang(lang);
     if (lang === "am") setVoiceProfile("am-ET-AmehaNeural");
@@ -221,7 +216,6 @@ export default function CommandDeckPage() {
       const data: PipelineTrace = await res.json();
       setResult(data);
       
-      // Auto-play synthesized voice when ready
       if (data.tts && data.tts.audio_url) {
         setTimeout(() => {
           if (audioRef.current) {
@@ -284,7 +278,6 @@ export default function CommandDeckPage() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
-      {/* Hidden Audio Element */}
       <audio
         ref={audioRef}
         onEnded={() => setIsPlaying(false)}
@@ -296,7 +289,6 @@ export default function CommandDeckPage() {
         }}
       />
 
-      {/* TOP HEADER / SYSTEM STATUS */}
       <header className="border-b border-cyan-500/20 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -319,7 +311,6 @@ export default function CommandDeckPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Backend Status Badge */}
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs">
               <span className={`w-2 h-2 rounded-full ${backendOnline ? 'bg-emerald-400 animate-ping' : 'bg-amber-500'}`} />
               <span className="text-slate-300 font-mono">
@@ -327,7 +318,6 @@ export default function CommandDeckPage() {
               </span>
             </div>
 
-            {/* Knowledge Base Modal Trigger */}
             <button
               onClick={() => {
                 setShowKnowledgeModal(true);
@@ -342,13 +332,8 @@ export default function CommandDeckPage() {
         </div>
       </header>
 
-      {/* MAIN CONTAINER */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        {/* LEFT COLUMN: COMMAND INPUT & SETTINGS (5 COLS) */}
         <div className="lg:col-span-5 flex flex-col gap-5">
-          
-          {/* QUICK COMMAND PRESETS */}
           <div className="glass-panel rounded-xl p-4">
             <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
               <Sparkles className="w-3.5 h-3.5 text-cyan-400" /> Quick Captain Commands
@@ -375,7 +360,6 @@ export default function CommandDeckPage() {
             </div>
           </div>
 
-          {/* COMMAND INPUT FORM */}
           <div className="glass-panel rounded-xl p-5 flex flex-col gap-4">
             <div>
               <label className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 mb-2 flex items-center justify-between">
@@ -393,9 +377,7 @@ export default function CommandDeckPage() {
               />
             </div>
 
-            {/* CONTROLS GRID */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {/* Target Language Select */}
               <div>
                 <label className="text-[11px] font-mono text-slate-400 mb-1 flex items-center gap-1.5">
                   <Globe className="w-3 h-3 text-cyan-400" /> Target Language
@@ -413,7 +395,6 @@ export default function CommandDeckPage() {
                 </select>
               </div>
 
-              {/* Captain Voice Select */}
               <div>
                 <label className="text-[11px] font-mono text-slate-400 mb-1 flex items-center gap-1.5">
                   <Mic className="w-3 h-3 text-violet-400" /> Voice Profile
@@ -432,7 +413,6 @@ export default function CommandDeckPage() {
               </div>
             </div>
 
-            {/* TOP-K SLIDER */}
             <div>
               <div className="flex justify-between items-center text-xs font-mono text-slate-400 mb-1">
                 <span className="flex items-center gap-1.5">
@@ -450,7 +430,6 @@ export default function CommandDeckPage() {
               />
             </div>
 
-            {/* TRANSMIT BUTTON */}
             <button
               onClick={() => handleTransmit()}
               disabled={loading || !query.trim()}
@@ -471,10 +450,7 @@ export default function CommandDeckPage() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: PIPELINE RESULTS & TRACE INSPECTOR (7 COLS) */}
         <div className="lg:col-span-7 flex flex-col gap-5">
-          
-          {/* AUDIO PLAYER & TRANSLATED SPEECH CARD */}
           <div className="glass-panel-glow rounded-xl p-5 relative overflow-hidden">
             <div className="flex items-center justify-between mb-3 border-b border-cyan-500/20 pb-3">
               <div className="flex items-center gap-2">
@@ -491,7 +467,6 @@ export default function CommandDeckPage() {
                 </div>
               </div>
 
-              {/* Audio Controls */}
               {result && result.tts && result.tts.audio_url && (
                 <div className="flex items-center gap-3">
                   <button
@@ -504,10 +479,8 @@ export default function CommandDeckPage() {
               )}
             </div>
 
-            {/* Audio Waveform Animation & Text Display */}
             {result ? (
               <div className="flex flex-col gap-3">
-                {/* Waveform Equalizer */}
                 <div className="flex items-center justify-between bg-slate-950/60 rounded-lg p-3 border border-slate-800">
                   <div className="flex items-center gap-1.5 h-7 px-2">
                     <span className={`w-1 rounded-full bg-cyan-400 ${isPlaying ? 'animate-bar-1' : 'h-1.5'}`} />
@@ -524,7 +497,6 @@ export default function CommandDeckPage() {
                   </div>
                 </div>
 
-                {/* Translated Text Speech Display */}
                 <div className="p-4 rounded-lg bg-slate-950/90 border border-cyan-500/30">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block mb-1">
                     SYNTHESIZED SPEECH TEXT ({result.input.target_language_name})
@@ -543,7 +515,6 @@ export default function CommandDeckPage() {
             )}
           </div>
 
-          {/* PIPELINE TRACE INSPECTOR (TABS) */}
           <div className="glass-panel rounded-xl p-5 flex flex-col gap-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <div className="flex items-center gap-2">
@@ -559,7 +530,6 @@ export default function CommandDeckPage() {
               )}
             </div>
 
-            {/* TAB HEADERS */}
             <div className="flex items-center gap-2 overflow-x-auto pb-1">
               <button
                 onClick={() => setActiveTab("retrieval")}
@@ -603,10 +573,8 @@ export default function CommandDeckPage() {
               </button>
             </div>
 
-            {/* TAB CONTENTS */}
             {result ? (
               <div className="mt-2 min-h-[220px]">
-                {/* TAB 1: RAG RETRIEVAL CHUNKS */}
                 {activeTab === "retrieval" && (
                   <div className="flex flex-col gap-3">
                     <div className="text-xs text-slate-400 font-mono flex items-center justify-between">
@@ -635,7 +603,6 @@ export default function CommandDeckPage() {
                   </div>
                 )}
 
-                {/* TAB 2: LLM RESPONSE & GROUNDING */}
                 {activeTab === "llm" && (
                   <div className="flex flex-col gap-3">
                     <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-500/30 flex flex-col gap-3">
@@ -662,7 +629,6 @@ export default function CommandDeckPage() {
                   </div>
                 )}
 
-                {/* TAB 3: TRANSLATION MATRIX */}
                 {activeTab === "translation" && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="p-3.5 rounded-lg bg-slate-950/80 border border-slate-800 flex flex-col gap-2">
@@ -682,7 +648,6 @@ export default function CommandDeckPage() {
                   </div>
                 )}
 
-                {/* TAB 4: TTS SPECS */}
                 {activeTab === "tts" && (
                   <div className="p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex flex-col gap-3 font-mono text-xs text-slate-300">
                     <div className="flex justify-between py-1 border-b border-slate-800">
@@ -715,11 +680,9 @@ export default function CommandDeckPage() {
         </div>
       </main>
 
-      {/* KNOWLEDGE BASE EXPLORER MODAL */}
       {showKnowledgeModal && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-slate-900 border border-cyan-500/30 rounded-xl w-full max-w-4xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
-            {/* Modal Header */}
             <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
               <div className="flex items-center gap-2">
                 <Database className="w-5 h-5 text-cyan-400" />
@@ -735,10 +698,7 @@ export default function CommandDeckPage() {
               </button>
             </div>
 
-            {/* Modal Body */}
             <div className="p-4 overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-              
-              {/* Left Column: Search & Add Document */}
               <div className="flex flex-col gap-4">
                 <div className="relative">
                   <Search className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
@@ -751,7 +711,6 @@ export default function CommandDeckPage() {
                   />
                 </div>
 
-                {/* Add Document Form */}
                 <form onSubmit={handleAddKnowledge} className="p-3.5 rounded-lg bg-slate-950/90 border border-slate-800 flex flex-col gap-3">
                   <span className="text-xs font-mono font-bold text-cyan-400 flex items-center gap-1.5">
                     <Plus className="w-4 h-4" /> Add Custom Operational Document
@@ -796,7 +755,6 @@ export default function CommandDeckPage() {
                 </form>
               </div>
 
-              {/* Right Column: Indexed Documents List */}
               <div className="flex flex-col gap-3 max-h-[500px] overflow-y-auto pr-1">
                 {filteredKb.map((doc) => (
                   <div key={doc.id} className="p-3 rounded-lg bg-slate-950 border border-slate-800 flex flex-col gap-1.5">

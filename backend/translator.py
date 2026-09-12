@@ -1,9 +1,9 @@
 import os
+import re
+import time
 from typing import Dict, Any
 
 class TranslationEngine:
-    """Translation Engine utilizing deep-translator (MyMemory & Google Translate) for free multi-lingual support."""
-
     SUPPORTED_LANGUAGES = {
         "en": "English",
         "am": "Amharic (አማርኛ)",
@@ -17,7 +17,6 @@ class TranslationEngine:
         "hi": "Hindi (हिन्दी)"
     }
 
-    # Language code mapping for MyMemory API (requires standard RFC 3066 tag like 'am-ET')
     MYMEMORY_LANG_MAP = {
         "am": "am-ET",
         "en": "en-US",
@@ -34,8 +33,35 @@ class TranslationEngine:
     def __init__(self):
         print("Translation Engine: Initialized with support for 10+ languages (including Amharic).")
 
+    def _chunk_text(self, input_text: str, max_chunk_size: int = 350) -> list[str]:
+        if not input_text or not input_text.strip():
+            return []
+
+        parts = re.split(r'(?<=[.!?;\n])\s+', input_text.strip())
+        chunks = []
+        curr = ""
+        for p in parts:
+            if len(p) > max_chunk_size:
+                words = p.split(' ')
+                for w in words:
+                    if len(curr) + len(w) + 1 <= max_chunk_size:
+                        curr = (curr + " " + w).strip()
+                    else:
+                        if curr:
+                            chunks.append(curr)
+                        curr = w
+            else:
+                if len(curr) + len(p) + 1 <= max_chunk_size:
+                    curr = (curr + " " + p).strip()
+                else:
+                    if curr:
+                        chunks.append(curr)
+                    curr = p
+        if curr:
+            chunks.append(curr)
+        return chunks
+
     def translate(self, text: str, target_lang: str = "am") -> Dict[str, Any]:
-        """Translates input text to target language using robust free translation providers."""
         if not text or not text.strip():
             return {
                 "translated_text": "",
@@ -44,82 +70,66 @@ class TranslationEngine:
                 "target_lang_name": self.SUPPORTED_LANGUAGES.get(target_lang, target_lang)
             }
 
-        # If target language is English or same, return directly
         if target_lang.lower() in ["en", "english"]:
             return {
                 "translated_text": text,
                 "source_lang": "en",
                 "target_lang": "en",
-                "target_lang_name": "English"
+                "target_lang_name": "English",
+                "provider": "Direct"
             }
 
-        # Helper function to split long text into chunks <= 400 chars
-        def chunk_text(input_text: str, max_chunk_size: int = 400):
-            sentences = input_text.split('. ')
-            chunks = []
-            curr_chunk = ""
-            for s in sentences:
-                sentence = s if s.endswith('.') else s + '.'
-                if len(curr_chunk) + len(sentence) + 1 <= max_chunk_size:
-                    curr_chunk = (curr_chunk + " " + sentence).strip()
+        for attempt in range(2):
+            try:
+                from deep_translator import GoogleTranslator
+                translator = GoogleTranslator(source='en', target=target_lang)
+                if len(text) > 1500:
+                    chunks = self._chunk_text(text, max_chunk_size=1000)
+                    translated_chunks = [translator.translate(c) for c in chunks if c.strip()]
+                    translated = " ".join(translated_chunks)
                 else:
-                    if curr_chunk:
-                        chunks.append(curr_chunk)
-                    curr_chunk = sentence
-            if curr_chunk:
-                chunks.append(curr_chunk)
-            return chunks
+                    translated = translator.translate(text)
 
-        # Attempt 1: GoogleTranslator (Supports up to 5000 chars, reliable & high accuracy for Amharic)
-        try:
-            from deep_translator import GoogleTranslator
-            translator = GoogleTranslator(source='en', target=target_lang)
-            # If text is very long, chunk it
-            if len(text) > 4000:
-                chunks = chunk_text(text, 3500)
-                translated_chunks = [translator.translate(c) for c in chunks]
+                if translated and not translated.startswith("Error"):
+                    return {
+                        "translated_text": translated,
+                        "source_lang": "en",
+                        "target_lang": target_lang,
+                        "target_lang_name": self.SUPPORTED_LANGUAGES.get(target_lang, target_lang),
+                        "provider": "GoogleTranslate"
+                    }
+            except Exception as e:
+                print(f"GoogleTranslator attempt {attempt+1} failed: {e}")
+                time.sleep(0.5)
+
+        for attempt in range(2):
+            try:
+                from deep_translator import MyMemoryTranslator
+                target_tag = self.MYMEMORY_LANG_MAP.get(target_lang, target_lang)
+                translator = MyMemoryTranslator(source='en-US', target=target_tag)
+                
+                chunks = self._chunk_text(text, max_chunk_size=350)
+                translated_chunks = [translator.translate(c) for c in chunks if c.strip()]
                 translated = " ".join(translated_chunks)
-            else:
-                translated = translator.translate(text)
+                
+                if translated and not translated.startswith("Error"):
+                    return {
+                        "translated_text": translated,
+                        "source_lang": "en",
+                        "target_lang": target_lang,
+                        "target_lang_name": self.SUPPORTED_LANGUAGES.get(target_lang, target_lang),
+                        "provider": "MyMemory"
+                    }
+            except Exception as e:
+                print(f"MyMemoryTranslator attempt {attempt+1} failed: {e}")
+                time.sleep(0.5)
 
-            if translated and not translated.startswith("Error"):
-                return {
-                    "translated_text": translated,
-                    "source_lang": "en",
-                    "target_lang": target_lang,
-                    "target_lang_name": self.SUPPORTED_LANGUAGES.get(target_lang, target_lang),
-                    "provider": "GoogleTranslate"
-                }
-        except Exception as e:
-            print(f"GoogleTranslator failed for {target_lang}: {e}")
-
-        # Attempt 2: MyMemoryTranslator (with chunking for 500 char limit)
-        try:
-            from deep_translator import MyMemoryTranslator
-            target_tag = self.MYMEMORY_LANG_MAP.get(target_lang, target_lang)
-            translator = MyMemoryTranslator(source='en-US', target=target_tag)
-            
-            chunks = chunk_text(text, 400)
-            translated_chunks = [translator.translate(c) for c in chunks if c.strip()]
-            translated = " ".join(translated_chunks)
-            
-            if translated and not translated.startswith("Error"):
-                return {
-                    "translated_text": translated,
-                    "source_lang": "en",
-                    "target_lang": target_lang,
-                    "target_lang_name": self.SUPPORTED_LANGUAGES.get(target_lang, target_lang),
-                    "provider": "MyMemory"
-                }
-        except Exception as e:
-            print(f"MyMemoryTranslator fallback failed for {target_lang}: {e}")
-
-        # Safe Fallback: Return original text with notice if network is isolated
         return {
             "translated_text": text,
             "source_lang": "en",
             "target_lang": target_lang,
             "target_lang_name": self.SUPPORTED_LANGUAGES.get(target_lang, target_lang),
+            "provider": "Fallback",
             "notice": "Translation service fallback active."
         }
 
