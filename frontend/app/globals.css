@@ -21,6 +21,19 @@ body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+button, input, select, textarea {
+  touch-action: manipulation;
 }
 
 .glass-panel {
@@ -39,8 +52,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #090D16;
@@ -72,3 +85,4 @@ body {
 .pulse-glow {
   animation: pulseGlow 2.5s ease-in-out infinite;
 }
+

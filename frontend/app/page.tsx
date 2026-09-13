@@ -301,32 +301,33 @@ export default function CommandDeckPage() {
         }}
       />
 
-      <header className="border-b border-cyan-500/20 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-              <Radio className="w-5 h-5 animate-pulse" />
+      <header className="border-b border-cyan-500/20 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40 shadow-lg shadow-cyan-950/20">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3.5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shrink-0">
+              <Radio className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-lg font-bold tracking-wider text-slate-100 uppercase">
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <h1 className="text-base sm:text-lg font-bold tracking-wider text-slate-100 uppercase truncate">
                   CAPTAIN COMMAND DECK
                 </h1>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
-                  RAG VOICE ENGINE v1.0
+                <span className="text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 whitespace-nowrap">
+                  RAG VOICE v1.0
                 </span>
               </div>
-              <p className="text-xs text-slate-400">
+              <p className="text-[11px] sm:text-xs text-slate-400 truncate">
                 Grounded Retrieval • Multi-Lingual Translation • Edge Neural Voice
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs">
-              <span className={`w-2 h-2 rounded-full ${backendOnline ? 'bg-emerald-400 animate-ping' : 'bg-amber-500'}`} />
-              <span className="text-slate-300 font-mono">
-                API: {backendOnline ? "ONLINE [127.0.0.1:5000]" : "CONNECTING..."}
+          <div className="flex items-center justify-between sm:justify-end gap-2 sm:gap-3 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-800/60">
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-slate-900 border border-slate-800 text-[11px] sm:text-xs">
+              <span className={`w-2 h-2 rounded-full shrink-0 ${backendOnline ? 'bg-emerald-400 animate-ping' : 'bg-amber-500'}`} />
+              <span className="text-slate-300 font-mono text-[10px] sm:text-xs">
+                API: <span className="hidden xs:inline">{backendOnline ? "ONLINE [127.0.0.1:5000]" : "CONNECTING..."}</span>
+                <span className="xs:hidden">{backendOnline ? "ONLINE" : "CONNECTING"}</span>
               </span>
             </div>
 
@@ -335,39 +336,39 @@ export default function CommandDeckPage() {
                 setShowKnowledgeModal(true);
                 fetchKnowledgeBase();
               }}
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-medium transition"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-medium transition active:scale-95 shrink-0 min-h-[36px]"
             >
-              <Database className="w-4 h-4 text-cyan-400" />
+              <Database className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400" />
               <span>Knowledge Base</span>
             </button>
           </div>
         </div>
       </header>
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 flex flex-col gap-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-6 flex flex-col gap-4 sm:gap-6">
         
         {errorMessage && (
-          <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between text-amber-300 text-xs font-medium animate-fadeIn">
-            <div className="flex items-center gap-2.5">
-              <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
-              <span>{errorMessage}</span>
+          <div className="p-3.5 sm:p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start justify-between text-amber-300 text-xs font-medium animate-fadeIn gap-2">
+            <div className="flex items-start gap-2.5">
+              <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+              <span className="leading-relaxed">{errorMessage}</span>
             </div>
             <button
               onClick={() => setErrorMessage(null)}
-              className="p-1 rounded hover:bg-amber-500/20 text-amber-400 transition"
+              className="p-1 rounded hover:bg-amber-500/20 text-amber-400 transition shrink-0"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-5 flex flex-col gap-5">
-            <div className="glass-panel rounded-xl p-4">
-              <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" /> Quick Captain Commands
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
+          <div className="lg:col-span-5 flex flex-col gap-4 sm:gap-5">
+            <div className="glass-panel rounded-xl p-3.5 sm:p-4">
+              <h2 className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-slate-400 mb-2.5 sm:mb-3 flex items-center gap-2">
+                <Sparkles className="w-3.5 h-3.5 text-cyan-400 shrink-0" /> Quick Captain Commands
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
                 {PRESET_COMMANDS.map((preset, idx) => {
                   const IconComp = preset.icon;
                   return (
@@ -377,10 +378,10 @@ export default function CommandDeckPage() {
                         setQuery(preset.query);
                         handleTransmit(preset.query);
                       }}
-                      className={`p-2.5 rounded-lg border text-left flex items-start gap-2.5 transition hover:scale-[1.02] active:scale-[0.98] ${preset.color}`}
+                      className={`p-2.5 rounded-lg border text-left flex items-start gap-2 sm:gap-2.5 transition active:scale-[0.98] min-h-[48px] touch-manipulation ${preset.color}`}
                     >
                       <IconComp className="w-4 h-4 mt-0.5 shrink-0" />
-                      <span className="text-xs font-medium line-clamp-2 leading-tight">
+                      <span className="text-[11px] sm:text-xs font-medium line-clamp-2 leading-snug">
                         {preset.label}
                       </span>
                     </button>
@@ -389,11 +390,11 @@ export default function CommandDeckPage() {
               </div>
             </div>
 
-            <div className="glass-panel rounded-xl p-5 flex flex-col gap-4">
+            <div className="glass-panel rounded-xl p-3.5 sm:p-5 flex flex-col gap-3.5 sm:gap-4">
               <div>
-                <label className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 mb-2 flex items-center justify-between">
+                <label className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-slate-300 mb-1.5 sm:mb-2 flex items-center justify-between">
                   <span className="flex items-center gap-2">
-                    <Terminal className="w-3.5 h-3.5 text-cyan-400" /> Transmit Command
+                    <Terminal className="w-3.5 h-3.5 text-cyan-400 shrink-0" /> Transmit Command
                   </span>
                   <span className="text-[10px] text-slate-500 font-normal">Text Input Layer</span>
                 </label>
@@ -402,19 +403,19 @@ export default function CommandDeckPage() {
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Enter Captain operational query or emergency command..."
                   rows={4}
-                  className="w-full rounded-lg bg-slate-950/80 border border-slate-800 p-3 text-sm text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/60 transition resize-none font-mono"
+                  className="w-full rounded-lg bg-slate-950/80 border border-slate-800 p-3 text-sm sm:text-xs font-mono text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/60 transition resize-none"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="text-[11px] font-mono text-slate-400 mb-1 flex items-center gap-1.5">
-                    <Globe className="w-3 h-3 text-cyan-400" /> Target Language
+                    <Globe className="w-3 h-3 text-cyan-400 shrink-0" /> Target Language
                   </label>
                   <select
                     value={targetLang}
                     onChange={(e) => handleLanguageChange(e.target.value)}
-                    className="w-full rounded-lg bg-slate-900 border border-slate-800 py-2 px-2.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 transition"
+                    className="w-full rounded-lg bg-slate-900 border border-slate-800 py-2.5 sm:py-2 px-3 sm:px-2.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 transition min-h-[42px] sm:min-h-0"
                   >
                     {Object.entries(languages).map(([code, name]) => (
                       <option key={code} value={code}>
@@ -426,12 +427,12 @@ export default function CommandDeckPage() {
 
                 <div>
                   <label className="text-[11px] font-mono text-slate-400 mb-1 flex items-center gap-1.5">
-                    <Mic className="w-3 h-3 text-violet-400" /> Voice Profile
+                    <Mic className="w-3 h-3 text-violet-400 shrink-0" /> Voice Profile
                   </label>
                   <select
                     value={voiceProfile}
                     onChange={(e) => setVoiceProfile(e.target.value)}
-                    className="w-full rounded-lg bg-slate-900 border border-slate-800 py-2 px-2.5 text-xs text-slate-200 focus:outline-none focus:border-violet-500 transition"
+                    className="w-full rounded-lg bg-slate-900 border border-slate-800 py-2.5 sm:py-2 px-3 sm:px-2.5 text-xs text-slate-200 focus:outline-none focus:border-violet-500 transition min-h-[42px] sm:min-h-0"
                   >
                     {Object.entries(voices).map(([vId, vObj]: [string, any]) => (
                       <option key={vId} value={vId}>
@@ -443,11 +444,11 @@ export default function CommandDeckPage() {
               </div>
 
               <div>
-                <div className="flex justify-between items-center text-xs font-mono text-slate-400 mb-1">
+                <div className="flex justify-between items-center text-xs font-mono text-slate-400 mb-1.5">
                   <span className="flex items-center gap-1.5">
-                    <Sliders className="w-3 h-3 text-cyan-400" /> RAG Retrieval Depth (Top-K Chunks)
+                    <Sliders className="w-3 h-3 text-cyan-400 shrink-0" /> RAG Depth (Top-K)
                   </span>
-                  <span className="text-cyan-400 font-bold">{topK}</span>
+                  <span className="text-cyan-400 font-bold">{topK} Chunks</span>
                 </div>
                 <input
                   type="range"
@@ -455,14 +456,14 @@ export default function CommandDeckPage() {
                   max={5}
                   value={topK}
                   onChange={(e) => setTopK(parseInt(e.target.value))}
-                  className="w-full accent-cyan-400 bg-slate-900 cursor-pointer h-1.5 rounded-lg"
+                  className="w-full accent-cyan-400 bg-slate-900 cursor-pointer h-2 sm:h-1.5 rounded-lg py-1 touch-action-none"
                 />
               </div>
 
               <button
                 onClick={() => handleTransmit()}
                 disabled={loading || !query.trim()}
-                className="w-full mt-2 py-3 px-4 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-cyan-500/20 active:scale-[0.99]"
+                className="w-full min-h-[48px] py-3 px-4 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-cyan-500/20 active:scale-[0.98] touch-manipulation"
               >
                 {loading ? (
                   <>
@@ -479,28 +480,30 @@ export default function CommandDeckPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-7 flex flex-col gap-5">
-            <div className="glass-panel-glow rounded-xl p-5 relative overflow-hidden">
-              <div className="flex items-center justify-between mb-3 border-b border-cyan-500/20 pb-3">
-                <div className="flex items-center gap-2">
-                  <div className="p-1.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+          <div className="lg:col-span-7 flex flex-col gap-4 sm:gap-5">
+            <div className="glass-panel-glow rounded-xl p-3.5 sm:p-5 relative overflow-hidden">
+              <div className="flex flex-wrap items-center justify-between gap-2.5 mb-3 border-b border-cyan-500/20 pb-3">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="p-2 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 shrink-0">
                     <Volume2 className="w-4 h-4" />
                   </div>
-                  <div>
-                    <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
+                  <div className="min-w-0">
+                    <h2 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-slate-200 truncate">
                       Captain Voice Output
                     </h2>
-                    <p className="text-[11px] text-slate-400">
-                      Language: <span className="text-cyan-300 font-semibold">{result ? result.input.target_language_name : "Amharic (አማርኛ)"}</span> • Profile: <span className="text-violet-300 font-semibold">{result ? result.input.voice_name : "Captain Ameha"}</span>
+                    <p className="text-[10px] sm:text-[11px] text-slate-400 flex flex-wrap gap-x-1.5">
+                      <span>Lang: <span className="text-cyan-300 font-semibold">{result ? result.input.target_language_name : "Amharic (አማርኛ)"}</span></span>
+                      <span>• Voice: <span className="text-violet-300 font-semibold">{result ? result.input.voice_name : "Captain Ameha"}</span></span>
                     </p>
                   </div>
                 </div>
 
                 {result && result.tts && result.tts.audio_url && (
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 shrink-0">
                     <button
                       onClick={toggleAudioPlay}
-                      className="p-2.5 rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold transition shadow-md shadow-cyan-500/30"
+                      className="p-3 sm:p-2.5 rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold transition shadow-md shadow-cyan-500/30 active:scale-90 min-w-[42px] min-h-[42px] flex items-center justify-center"
+                      title={isPlaying ? "Pause Audio" : "Play Synthesized Speech"}
                     >
                       {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
                     </button>
@@ -511,14 +514,14 @@ export default function CommandDeckPage() {
               {result ? (
                 <div className="flex flex-col gap-3">
                   {result.translation.notice && (
-                    <div className="px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center gap-2 text-blue-300 text-xs">
-                      <Info className="w-4 h-4 text-blue-400 shrink-0" />
-                      <span>{result.translation.notice}</span>
+                    <div className="px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-start gap-2 text-blue-300 text-xs">
+                      <Info className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                      <span className="leading-relaxed">{result.translation.notice}</span>
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between bg-slate-950/60 rounded-lg p-3 border border-slate-800">
-                    <div className="flex items-center gap-1.5 h-7 px-2">
+                  <div className="flex flex-col xs:flex-row items-stretch xs:items-center justify-between gap-2 bg-slate-950/60 rounded-lg p-2.5 sm:p-3 border border-slate-800">
+                    <div className="flex items-center justify-center xs:justify-start gap-1.5 h-7 px-2">
                       <span className={`w-1 rounded-full bg-cyan-400 ${isPlaying ? 'animate-bar-1' : 'h-1.5'}`} />
                       <span className={`w-1 rounded-full bg-cyan-400 ${isPlaying ? 'animate-bar-2' : 'h-3'}`} />
                       <span className={`w-1 rounded-full bg-cyan-400 ${isPlaying ? 'animate-bar-3' : 'h-2'}`} />
@@ -527,49 +530,49 @@ export default function CommandDeckPage() {
                       <span className={`w-1 rounded-full bg-cyan-400 ${isPlaying ? 'animate-bar-2' : 'h-3'}`} />
                     </div>
                     
-                    <div className="text-right text-[11px] font-mono text-slate-400">
+                    <div className="text-center xs:text-right text-[10px] sm:text-[11px] font-mono text-slate-400">
                       <span>{Math.floor(audioProgress)}s / {Math.floor(audioDuration)}s</span>
                       <span className="ml-2 text-slate-500">({(result.tts.file_size_bytes / 1024).toFixed(1)} KB)</span>
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-lg bg-slate-950/90 border border-cyan-500/30">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block mb-1">
+                  <div className="p-3.5 sm:p-4 rounded-lg bg-slate-950/90 border border-cyan-500/30">
+                    <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold block mb-1">
                       SYNTHESIZED SPEECH TEXT ({result.input.target_language_name})
                     </span>
-                    <p className="text-base font-medium text-slate-100 leading-relaxed font-sans">
+                    <p className="text-sm sm:text-base font-medium text-slate-100 leading-relaxed font-sans break-words">
                       "{result.translation.translated_text}"
                     </p>
                   </div>
                 </div>
               ) : (
-                <div className="py-8 flex flex-col items-center justify-center text-center text-slate-500">
-                  <Radio className="w-8 h-8 text-slate-700 mb-2 animate-pulse" />
+                <div className="py-6 sm:py-8 flex flex-col items-center justify-center text-center text-slate-500">
+                  <Radio className="w-7 h-7 sm:w-8 sm:h-8 text-slate-700 mb-2 animate-pulse" />
                   <p className="text-xs font-mono">Awaiting command transmission...</p>
-                  <p className="text-[11px] text-slate-600">Audio playback will materialize here upon response generation.</p>
+                  <p className="text-[10px] sm:text-[11px] text-slate-600 px-4 mt-1">Audio playback will materialize here upon response generation.</p>
                 </div>
               )}
             </div>
 
-            <div className="glass-panel rounded-xl p-5 flex flex-col gap-4">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div className="glass-panel rounded-xl p-3.5 sm:p-5 flex flex-col gap-3.5 sm:gap-4">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2.5 sm:pb-3">
                 <div className="flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-cyan-400" />
+                  <Activity className="w-4 h-4 text-cyan-400 shrink-0" />
                   <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
-                    Full Execution Pipeline Audit Trace
+                    Pipeline Audit Trace
                   </h3>
                 </div>
                 {result && (
-                  <span className="text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded">
+                  <span className="text-[10px] sm:text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded whitespace-nowrap">
                     Latency: {result.trace.execution_time_ms} ms
                   </span>
                 )}
               </div>
 
-              <div className="flex items-center gap-2 overflow-x-auto pb-1">
+              <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 no-scrollbar touch-pan-x -mx-1 px-1">
                 <button
                   onClick={() => setActiveTab("retrieval")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-1.5 whitespace-nowrap ${
+                  className={`px-2.5 sm:px-3 py-2 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-medium transition flex items-center gap-1.5 whitespace-nowrap shrink-0 min-h-[38px] sm:min-h-0 ${
                     activeTab === "retrieval"
                       ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
                       : "bg-slate-900 text-slate-400 hover:bg-slate-800"
@@ -579,58 +582,58 @@ export default function CommandDeckPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab("llm")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-1.5 whitespace-nowrap ${
+                  className={`px-2.5 sm:px-3 py-2 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-medium transition flex items-center gap-1.5 whitespace-nowrap shrink-0 min-h-[38px] sm:min-h-0 ${
                     activeTab === "llm"
                       ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
                       : "bg-slate-900 text-slate-400 hover:bg-slate-800"
                   }`}
                 >
-                  <Cpu className="w-3.5 h-3.5" /> 2. LLM Grounded Response
+                  <Cpu className="w-3.5 h-3.5" /> 2. LLM Response
                 </button>
                 <button
                   onClick={() => setActiveTab("translation")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-1.5 whitespace-nowrap ${
+                  className={`px-2.5 sm:px-3 py-2 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-medium transition flex items-center gap-1.5 whitespace-nowrap shrink-0 min-h-[38px] sm:min-h-0 ${
                     activeTab === "translation"
                       ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
                       : "bg-slate-900 text-slate-400 hover:bg-slate-800"
                   }`}
                 >
-                  <Globe className="w-3.5 h-3.5" /> 3. Translation Matrix
+                  <Globe className="w-3.5 h-3.5" /> 3. Translation
                 </button>
                 <button
                   onClick={() => setActiveTab("tts")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition flex items-center gap-1.5 whitespace-nowrap ${
+                  className={`px-2.5 sm:px-3 py-2 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-mono font-medium transition flex items-center gap-1.5 whitespace-nowrap shrink-0 min-h-[38px] sm:min-h-0 ${
                     activeTab === "tts"
                       ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
                       : "bg-slate-900 text-slate-400 hover:bg-slate-800"
                   }`}
                 >
-                  <Mic className="w-3.5 h-3.5" /> 4. Voice Synthesis Spec
+                  <Mic className="w-3.5 h-3.5" /> 4. Voice Spec
                 </button>
               </div>
 
               {result ? (
-                <div className="mt-2 min-h-[220px]">
+                <div className="mt-1 min-h-[200px]">
                   {activeTab === "retrieval" && (
                     <div className="flex flex-col gap-3">
                       <div className="text-xs text-slate-400 font-mono flex items-center justify-between">
-                        <span>Top Chunks Retrieved from Vector Database</span>
+                        <span>Retrieved Vector Chunks</span>
                         <span className="text-cyan-400 font-semibold">Max Match: {result.rag.top_score}</span>
                       </div>
                       {result.rag.retrieved_chunks.map((chunk, idx) => (
                         <div
                           key={idx}
-                          className="p-3.5 rounded-lg bg-slate-950/70 border border-slate-800 flex flex-col gap-2 hover:border-cyan-500/40 transition"
+                          className="p-3 sm:p-3.5 rounded-lg bg-slate-950/70 border border-slate-800 flex flex-col gap-2 hover:border-cyan-500/40 transition"
                         >
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-mono font-semibold text-cyan-300 flex items-center gap-2">
-                              <FileText className="w-3.5 h-3.5" /> [{chunk.id}] {chunk.title}
+                          <div className="flex flex-wrap items-center justify-between gap-1.5">
+                            <span className="text-xs font-mono font-semibold text-cyan-300 flex items-center gap-1.5 break-all">
+                              <FileText className="w-3.5 h-3.5 shrink-0" /> [{chunk.id}] {chunk.title}
                             </span>
-                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold">
+                            <span className="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold whitespace-nowrap">
                               Match: {chunk.similarity_pct}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-300 leading-relaxed bg-slate-900/50 p-2.5 rounded border border-slate-800/80 font-sans">
+                          <p className="text-xs text-slate-300 leading-relaxed bg-slate-900/50 p-2.5 rounded border border-slate-800/80 font-sans break-words">
                             "{chunk.content}"
                           </p>
                           <span className="text-[10px] text-slate-500 font-mono">Category: {chunk.category}</span>
@@ -641,20 +644,20 @@ export default function CommandDeckPage() {
 
                   {activeTab === "llm" && (
                     <div className="flex flex-col gap-3">
-                      <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-500/30 flex flex-col gap-3">
-                        <div className="flex items-center justify-between">
+                      <div className="p-3.5 sm:p-4 rounded-lg bg-slate-950/80 border border-cyan-500/30 flex flex-col gap-3">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
                           <span className="text-xs font-mono font-bold text-cyan-400 flex items-center gap-1.5">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400" /> GROUNDED LLM SYNTHESIS
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" /> GROUNDED LLM SYNTHESIS
                           </span>
                           <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-400">
                             Provider: {result.llm.provider.toUpperCase()}
                           </span>
                         </div>
-                        <p className="text-xs text-slate-200 leading-relaxed font-sans whitespace-pre-wrap">
+                        <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans whitespace-pre-wrap break-words">
                           {result.llm.response}
                         </p>
-                        <div className="flex items-center gap-2 pt-2 border-t border-slate-800">
-                          <span className="text-[11px] font-mono text-slate-400">Context Citations:</span>
+                        <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-800">
+                          <span className="text-[11px] font-mono text-slate-400">Citations:</span>
                           {result.llm.citations.map((c, i) => (
                             <span key={i} className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold">
                               {c}
@@ -669,7 +672,7 @@ export default function CommandDeckPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="p-3.5 rounded-lg bg-slate-950/80 border border-slate-800 flex flex-col gap-2">
                         <span className="text-[10px] font-mono text-slate-400 uppercase">Original English LLM Text</span>
-                        <p className="text-xs text-slate-300 font-sans leading-relaxed">
+                        <p className="text-xs text-slate-300 font-sans leading-relaxed break-words">
                           {result.llm.response}
                         </p>
                       </div>
@@ -677,7 +680,7 @@ export default function CommandDeckPage() {
                         <span className="text-[10px] font-mono text-cyan-400 uppercase font-semibold">
                           Translated Text ({result.translation.target_lang_name})
                         </span>
-                        <p className="text-xs text-cyan-100 font-sans leading-relaxed">
+                        <p className="text-xs text-cyan-100 font-sans leading-relaxed break-words">
                           {result.translation.translated_text}
                         </p>
                       </div>
@@ -685,31 +688,31 @@ export default function CommandDeckPage() {
                   )}
 
                   {activeTab === "tts" && (
-                    <div className="p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex flex-col gap-3 font-mono text-xs text-slate-300">
-                      <div className="flex justify-between py-1 border-b border-slate-800">
-                        <span className="text-slate-500">TTS Engine:</span>
-                        <span className="text-cyan-400">Microsoft Edge Neural TTS (edge-tts)</span>
+                    <div className="p-3.5 sm:p-4 rounded-lg bg-slate-950/80 border border-slate-800 flex flex-col gap-2.5 font-mono text-xs text-slate-300">
+                      <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center py-1 border-b border-slate-800 gap-0.5 xs:gap-2">
+                        <span className="text-slate-500 shrink-0">TTS Engine:</span>
+                        <span className="text-cyan-400 text-left xs:text-right">Microsoft Edge Neural TTS (edge-tts)</span>
                       </div>
-                      <div className="flex justify-between py-1 border-b border-slate-800">
-                        <span className="text-slate-500">Selected Voice ID:</span>
-                        <span className="text-violet-300">{result.input.voice_profile}</span>
+                      <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center py-1 border-b border-slate-800 gap-0.5 xs:gap-2">
+                        <span className="text-slate-500 shrink-0">Voice Profile:</span>
+                        <span className="text-violet-300 text-left xs:text-right break-all">{result.input.voice_profile}</span>
                       </div>
-                      <div className="flex justify-between py-1 border-b border-slate-800">
-                        <span className="text-slate-500">Audio File Name:</span>
-                        <span className="text-slate-300">{result.tts.audio_filename}</span>
+                      <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center py-1 border-b border-slate-800 gap-0.5 xs:gap-2">
+                        <span className="text-slate-500 shrink-0">Audio Filename:</span>
+                        <span className="text-slate-300 text-left xs:text-right break-all">{result.tts.audio_filename}</span>
                       </div>
-                      <div className="flex justify-between py-1">
-                        <span className="text-slate-500">Audio Endpoint:</span>
-                        <span className="text-emerald-400">{result.tts.audio_url}</span>
+                      <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center py-1 gap-0.5 xs:gap-2">
+                        <span className="text-slate-500 shrink-0">Audio Endpoint:</span>
+                        <span className="text-emerald-400 text-left xs:text-right break-all">{result.tts.audio_url}</span>
                       </div>
                     </div>
                   )}
                 </div>
               ) : (
-                <div className="py-12 flex flex-col items-center justify-center text-center text-slate-600">
-                  <Terminal className="w-8 h-8 text-slate-700 mb-2" />
+                <div className="py-8 sm:py-12 flex flex-col items-center justify-center text-center text-slate-600">
+                  <Terminal className="w-7 h-7 sm:w-8 sm:h-8 text-slate-700 mb-2" />
                   <p className="text-xs font-mono">No trace data available yet.</p>
-                  <p className="text-[11px] text-slate-600">Execute a command to populate the execution pipeline trace.</p>
+                  <p className="text-[10px] sm:text-[11px] text-slate-600 px-4 mt-1">Execute a command to populate the execution pipeline trace.</p>
                 </div>
               )}
             </div>
@@ -718,24 +721,25 @@ export default function CommandDeckPage() {
       </main>
 
       {showKnowledgeModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-cyan-500/30 rounded-xl w-full max-w-4xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
-            <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
-              <div className="flex items-center gap-2">
-                <Database className="w-5 h-5 text-cyan-400" />
-                <h2 className="text-sm font-mono font-bold text-slate-100 uppercase">
-                  Ship Operational Manual Knowledge Base ({knowledgeList.length} Documents)
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-2.5 sm:p-4 overflow-y-auto">
+          <div className="bg-slate-900 border border-cyan-500/30 rounded-xl w-full max-w-4xl max-h-[90vh] sm:max-h-[85vh] flex flex-col shadow-2xl overflow-hidden my-auto">
+            
+            <div className="p-3.5 sm:p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950 shrink-0">
+              <div className="flex items-center gap-2 min-w-0 pr-2">
+                <Database className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 shrink-0" />
+                <h2 className="text-xs sm:text-sm font-mono font-bold text-slate-100 uppercase truncate">
+                  Manual Knowledge Base ({knowledgeList.length} Docs)
                 </h2>
               </div>
               <button
                 onClick={() => setShowKnowledgeModal(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition active:scale-95 shrink-0"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="p-4 overflow-y-auto flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-3.5 sm:p-4 overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="flex flex-col gap-4">
                 <div className="relative">
                   <Search className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
@@ -744,13 +748,13 @@ export default function CommandDeckPage() {
                     value={kbSearch}
                     onChange={(e) => setKbSearch(e.target.value)}
                     placeholder="Search documents by title or keyword..."
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-2.5 sm:py-2 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
                   />
                 </div>
 
                 <form onSubmit={handleAddKnowledge} className="p-3.5 rounded-lg bg-slate-950/90 border border-slate-800 flex flex-col gap-3">
                   <span className="text-xs font-mono font-bold text-cyan-400 flex items-center gap-1.5">
-                    <Plus className="w-4 h-4" /> Add Custom Operational Document
+                    <Plus className="w-4 h-4 shrink-0" /> Add Custom Operational Document
                   </span>
                   <div>
                     <label className="text-[10px] font-mono text-slate-400">Document Title</label>
@@ -759,7 +763,7 @@ export default function CommandDeckPage() {
                       value={newDocTitle}
                       onChange={(e) => setNewDocTitle(e.target.value)}
                       placeholder="e.g. Sub-Space Sensor Override"
-                      className="w-full bg-slate-900 border border-slate-800 rounded p-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 mt-1"
+                      className="w-full bg-slate-900 border border-slate-800 rounded p-2.5 sm:p-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 mt-1"
                     />
                   </div>
                   <div>
@@ -769,7 +773,7 @@ export default function CommandDeckPage() {
                       value={newDocCat}
                       onChange={(e) => setNewDocCat(e.target.value)}
                       placeholder="Engineering / Tactical / Safety"
-                      className="w-full bg-slate-900 border border-slate-800 rounded p-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 mt-1"
+                      className="w-full bg-slate-900 border border-slate-800 rounded p-2.5 sm:p-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 mt-1"
                     />
                   </div>
                   <div>
@@ -779,31 +783,31 @@ export default function CommandDeckPage() {
                       onChange={(e) => setNewDocContent(e.target.value)}
                       placeholder="Detailed operational steps, safety parameters, clearance codes..."
                       rows={3}
-                      className="w-full bg-slate-900 border border-slate-800 rounded p-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 mt-1 resize-none"
+                      className="w-full bg-slate-900 border border-slate-800 rounded p-2.5 sm:p-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 mt-1 resize-none"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={addingDoc || !newDocTitle.trim() || !newDocContent.trim()}
-                    className="py-2 px-3 rounded bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition disabled:opacity-50"
+                    className="py-2.5 sm:py-2 px-3 rounded bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition disabled:opacity-50 min-h-[40px] touch-manipulation active:scale-95"
                   >
                     {addingDoc ? "Re-indexing Vector Store..." : "Index Document into RAG Engine"}
                   </button>
                 </form>
               </div>
 
-              <div className="flex flex-col gap-3 max-h-[500px] overflow-y-auto pr-1">
+              <div className="flex flex-col gap-3 max-h-[350px] lg:max-h-[500px] overflow-y-auto pr-1">
                 {filteredKb.map((doc) => (
                   <div key={doc.id} className="p-3 rounded-lg bg-slate-950 border border-slate-800 flex flex-col gap-1.5">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold text-cyan-300">
+                    <div className="flex flex-wrap items-center justify-between gap-1.5">
+                      <span className="text-xs font-mono font-bold text-cyan-300 break-all">
                         [{doc.id}] {doc.title}
                       </span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400">
+                      <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400 whitespace-nowrap">
                         {doc.category}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed font-sans">
+                    <p className="text-xs text-slate-300 leading-relaxed font-sans break-words">
                       {doc.content}
                     </p>
                   </div>
